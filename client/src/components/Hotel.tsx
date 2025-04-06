@@ -1,8 +1,4 @@
 import hotelImage from '../assets/hotel.jpeg';
-import { useEffect, useState } from 'react';
-
-useState
-
 
 const Hotel = () => {
 
