@@ -15,5 +15,6 @@ const HeroSection = () => {
   style={{ backgroundImage: `url(${heroSection})` }}>
     <h1 className="text-5xl font-bold mb-4">Welcome to Rishikesh</h1>
     <h2 className="text-5xl font-bold"> Explore the uttrakhands best tourist place</h2> 
+    <h2 className="text-5xl font-bold"> testing vercel deployment</h2>
     </div>;
 };
