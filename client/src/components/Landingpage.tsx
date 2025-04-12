@@ -1,6 +1,11 @@
 import ImageSlider from "./imageSlider";
+import { useEffect, useState } from "react";
 import boothnathTemple from "../assets/boothnathTemple.jpg";
-
+import bhotNathTemple1 from "../assets/bhotNathTemple1.jpg";
+import bhotNathTemple2 from "../assets/bhotNathTemple2.jpg";
+import bhotNathTemple3 from "../assets/bhotNathTemple3.jpg";
+import bhotNathTemple4 from "../assets/bhotNathTemple4.jpg";
+import bhotNathTemple5 from "../assets/bhotNathTemple5.jpg";
 const LandingPage = () => {
   return (
     <div className="bg-gradient-to-b from-green-100 to-white">
@@ -11,17 +16,30 @@ const LandingPage = () => {
 };
 export default LandingPage;
 
+
+
 const HeroSection = () => {
+  const images = [boothnathTemple, bhotNathTemple1, bhotNathTemple2,bhotNathTemple3,bhotNathTemple4,bhotNathTemple5]; // Add your images here
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex(prevIndex => (prevIndex + 1) % images.length);
+    }, 3000); // Change every 3 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, );
+
   return (
     <div
-      className="relative h-screen flex flex-col justify-center items-center text-white bg-cover"
-      style={{ 
-        backgroundImage: `url(${boothnathTemple})`,
-        backgroundPosition: 'center 30%' 
+      className="relative h-screen flex flex-col justify-center items-center text-white bg-cover transition-all duration-1000 ease-in-out"
+      style={{
+        backgroundImage: `url(${images[currentImageIndex]})`,
+        backgroundPosition: 'center 30%',
       }}
     >
       <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-      
+
       <div className="relative z-10 text-center px-4">
         <h1 className="text-6xl font-bold mb-6 font-serif">
           Discover Spiritual Rishikesh
@@ -40,3 +58,5 @@ const HeroSection = () => {
     </div>
   );
 };
+
+

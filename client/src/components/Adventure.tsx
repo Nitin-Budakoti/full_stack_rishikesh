@@ -60,7 +60,7 @@ const Adventure = () => {
         {adventures.map((activity, index) => (
           <div
             key={index}
-            className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105 overflow-hidden"
+            className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105 transform transition duration-500 overflow-hidden"
           >
             <img
               src={activity.image}
