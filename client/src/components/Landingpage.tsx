@@ -12,6 +12,7 @@ import tp8 from "../assets/tp8.png";
 const LandingPage = () => {
   return (
     <div className="bg-gradient-to-b from-green-100 to-white">
+      prachi
       <HeroSection />
       <ImageSlider />
     </div>
