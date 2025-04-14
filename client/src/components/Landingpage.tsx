@@ -1,11 +1,14 @@
 import ImageSlider from "./imageSlider";
 import { useEffect, useState } from "react";
 import boothnathTemple from "../assets/boothnathTemple.jpg";
-import bhotNathTemple1 from "../assets/bhotNathTemple1.jpg";
-import bhotNathTemple2 from "../assets/bhotNathTemple2.jpg";
-import bhotNathTemple3 from "../assets/bhotNathTemple3.jpg";
-import bhotNathTemple4 from "../assets/bhotNathTemple4.jpg";
-import bhotNathTemple5 from "../assets/bhotNathTemple5.jpg";
+import tp1 from "../assets/tp1.png";
+import tp2 from "../assets/tp2.png";
+import tp3 from "../assets/tp3.png";
+import tp4 from "../assets/tp4.png";
+import tp5 from "../assets/tp5.png";
+import tp6 from "../assets/tp6.png";
+import tp7 from "../assets/tp7.png";
+import tp8 from "../assets/tp8.png";
 const LandingPage = () => {
   return (
     <div className="bg-gradient-to-b from-green-100 to-white">
@@ -19,7 +22,7 @@ export default LandingPage;
 
 
 const HeroSection = () => {
-  const images = [boothnathTemple, bhotNathTemple1, bhotNathTemple2,bhotNathTemple3,bhotNathTemple4,bhotNathTemple5]; // Add your images here
+  const images = [boothnathTemple, tp1,tp2,tp3,tp4,tp5,tp6,tp7,tp8]; // Add your images here
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -53,7 +56,7 @@ const HeroSection = () => {
       </div>
 
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white opacity-60 text-6xl">
-        ॐ
+         ॐ
       </div>
     </div>
   );
