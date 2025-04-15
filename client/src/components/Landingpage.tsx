@@ -7,6 +7,7 @@ import boothnathTemple3 from "../assets/bhotNathTemple3.jpg"
 const LandingPage = () => {
   return (
     <div className="bg-gradient-to-b from-green-100 to-white">
+      prachi
       <HeroSection />
       <ImageSlider />
     </div>
