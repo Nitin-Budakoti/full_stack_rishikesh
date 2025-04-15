@@ -1,14 +1,9 @@
 import ImageSlider from "./imageSlider";
 import { useEffect, useState } from "react";
 import boothnathTemple from "../assets/boothnathTemple.jpg";
-import tp1 from "../assets/tp1.png";
-import tp2 from "../assets/tp2.png";
-import tp3 from "../assets/tp3.png";
-import tp4 from "../assets/tp4.png";
-import tp5 from "../assets/tp5.png";
-import tp6 from "../assets/tp6.png";
-import tp7 from "../assets/tp7.png";
-import tp8 from "../assets/tp8.png";
+import boothnathTemple1 from "../assets/bhotNathTemple1.jpg"
+import boothnathTemple2 from "../assets/bhotNathTemple2.jpg"
+import boothnathTemple3 from "../assets/bhotNathTemple3.jpg"
 const LandingPage = () => {
   return (
     <div className="bg-gradient-to-b from-green-100 to-white">
@@ -22,7 +17,7 @@ export default LandingPage;
 
 
 const HeroSection = () => {
-  const images = [boothnathTemple, tp1,tp2,tp3,tp4,tp5,tp6,tp7,tp8]; // Add your images here
+  const images = [boothnathTemple,boothnathTemple1,boothnathTemple2,boothnathTemple3 ]; // Add your images here
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
