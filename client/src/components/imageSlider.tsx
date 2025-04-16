@@ -1,25 +1,33 @@
-import img1 from "../assets/img1.jpeg";
-import img2 from "../assets/img2.jpeg";
-import img3 from "../assets/img3.jpeg";
-import img4 from "../assets/img4.jpeg";
-import img5 from "../assets/img5.jpeg";
+import i6 from "../assets/i6.jpg";
+import i1 from "../assets/i1.jpg";
+import i2 from "../assets/i2.jpg";
+import i3 from "../assets/i3.jpg";
+import i4 from "../assets/i4.jpg";
+import i5 from "../assets/i5.jpg";
+import i7 from "../assets/i7.jpg";
 
-const images = [img1, img2, img3, img4, img5];
+const images = [i6, i1,i2, i3, i4, i5,i7];
 
 const ImageSlider = () => {
   return (
     <div className="w-full overflow-hidden py-10 bg-gray-100 flex flex-col items-center">
-      <h2 className="text-3xl md:text-4xl font-bold text-blue-600 mb-6">
+      <h2 className="text-3xl md:text-4xl font-bold text-600 mb-12 font-bold mb-6 font-serif "style={{ color: '#5F9EA0' }}>
         Explore the Rishikesh Adventures
       </h2>
-      <div className="relative w-full h-64 sm:h-72 md:h-80 lg:h-96">
-        <div className="absolute top-0 left-0 flex animate-slide gap-6 w-[2000px] hover:[animation-play-state:paused]">
+      <div className="relative w-full h-64 sm:h-72 md:h-80 lg:h-96">/*gap between h2 and image*/
+        <div className="absolute top-0 left-0 flex animate-slide gap-12 w-[2000px] hover:[animation-play-state:paused]">
           {[...images, ...images].map((img, index) => (
             <div
               key={index}
-              className="min-w-[250px] sm:min-w-[280px] md:min-w-[300px] lg:min-w-[350px] h-full flex-shrink-0"
+              className="h-full flex-shrink-0"
+              style={{
+                minWidth: "250px",
+                height: "200px",
+              }}
             >
-              <div className="w-full h-full transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl hover:border-4 hover:border-blue-400 rounded-xl">
+              <div
+                className="transition-all duration-700 ease-in-out hover:scale-125 hover:shadow-2xl hover:border-4 hover:scale-125 hover:shadow-2xl hover:border-none-400 rounded-xl w-full h-full"
+              >
                 <img
                   src={img}
                   alt={`slider-${index}`}
@@ -35,3 +43,4 @@ const ImageSlider = () => {
 };
 
 export default ImageSlider;
+
