@@ -1,4 +1,3 @@
-import React from "react";
 import i6 from "../assets/i6.jpg";
 import i1 from "../assets/i1.jpg";
 import i2 from "../assets/i2.jpg";
