@@ -7,6 +7,7 @@ import img_4 from "../assets/img_4.jpg";
 import img_5 from "../assets/img_5.jpg";
 import img_8 from "../assets/img_8.jpg";
 import YogaSlider from "./YogaSlider";
+import ShoppingRishikesh from "./ShoppingRishikesh";
 const LandingPage = () => {
   return (
     <div className="bg-gradient-to-b from-green-100 to-white pt-0 mt-0">
@@ -14,6 +15,7 @@ const LandingPage = () => {
       <HeroSection />
       <ImageSlider />
       <YogaSlider />
+      <ShoppingRishikesh />
 
     </div>
   );
