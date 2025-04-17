@@ -18,3 +18,20 @@
   .animate-orbit {
     animation: orbit 20s linear infinite;
   }
+  
+  @keyframes slide {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .animate-slide {
+    animation: slide 35s linear infinite;
+  }
+  .active-link {
+    color: #FFD700; /* Golden color or any color you prefer */
+    font-weight: bold;
+  }
