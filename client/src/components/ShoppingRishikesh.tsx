@@ -91,4 +91,8 @@ const ShoppingRishikesh = () => {
   );
 };
 
+<<<<<<< HEAD
 export default ShoppingRishikesh;
+=======
+export default ShoppingRishikesh;
+>>>>>>> 549179f56e716c744359f6239005380f227594ce
