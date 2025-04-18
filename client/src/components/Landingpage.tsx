@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef,ChangeEvent,KeyboardEvent  } from "react";
 import ImageSlider from "./imageSlider";
 import YogaSlider from "./YogaSlider";
 import ShoppingRishikesh from "./ShoppingRishikesh";
@@ -8,11 +8,13 @@ import img_2 from "../assets/img_2.jpg";
 import img_4 from "../assets/img_4.jpg";
 import img_5 from "../assets/img_5.jpg";
 import img_8 from "../assets/img_8.jpg";
-import mantra from "../assets/mantra.mp3";
+// import { FiSend } from 'react-icons/fi';
+// import { BsRobot, BsPerson } from 'react-icons/bs';
+
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="relative overflow-hidden bg-slate-900">
+    <div className=" pb-32 relative overflow-hidden bg-slate-900">
       {/* Background elements */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/rice-paper.png')] opacity-20"></div>
@@ -38,7 +40,7 @@ const LandingPage: React.FC = () => {
       <Interactive3DMap />
       <TestimonialCarousel />
       <BoatAnimation />
-      <BackgroundMantra />
+      <TouristChatbot />
       <WeatherWidget />
       <PilgrimCounter />
     </div>
@@ -104,42 +106,152 @@ const HeroSection: React.FC = () => {
   );
 };
 
+
+const HOTSPOTS: string[] = [
+  "Triveni Ghat Rishikesh",
+  "Neelkanth Mahadev Temple Rishikesh",
+  "Ram Jhula Rishikesh",
+  "Parmarth Niketan Ashram Rishikesh",
+  "Lakshman Jhula Rishikesh",
+];
+
+const STYLES: string[] = ["roadmap", "satellite"];
+
 const Interactive3DMap: React.FC = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>(HOTSPOTS[0]);
+  const [manualSearch, setManualSearch] = useState<string>("");
+  const [mapStyle, setMapStyle] = useState<string>("satellite");
+  const [mapUrl, setMapUrl] = useState<string>("");
+
+  const GOOGLE_MAPS_API_KEY = "AIzaSyCcG6qP4M3JUP2ifGxxn0ZCDM643ET86ig";
+
+  const updateMapUrl = (location: string, style: string): void => {
+    const query = encodeURIComponent(location);
+    const url = `https://www.google.com/maps/embed/v1/place?key=${GOOGLE_MAPS_API_KEY}&q=${query}&maptype=${style}`;
+    setMapUrl(url);
+  };
+
+  const handleSearch = (): void => {
+    const locationToSearch = manualSearch.trim() || search;
+    updateMapUrl(locationToSearch, mapStyle);
+  };
+
+  const handleGeolocation = (): void => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const coords = `${position.coords.latitude},${position.coords.longitude}`;
+        const url = `https://www.google.com/maps/embed/v1/view?key=${GOOGLE_MAPS_API_KEY}&center=${coords}&zoom=15&maptype=${mapStyle}`;
+        setMapUrl(url);
+      },
+      () => {
+        alert("Failed to fetch current location.");
+      }
+    );
+  };
+
+  useEffect(() => {
+    updateMapUrl(search, mapStyle);
+  }, [mapStyle]);
 
   return (
-    <section className="py-16 bg-slate-800/90 backdrop-blur-sm relative overflow-hidden" id="map">
-      <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-amber-400/10 blur-3xl"></div>
+    <section id="map" className="relative overflow-hidden py-16 bg-slate-800/90 backdrop-blur-sm">
+      {/* Decorative Glow */}
+      <div className="absolute -top-24 -right-24 w-72 h-72 bg-amber-400/10 rounded-full blur-3xl z-0"></div>
 
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-amber-300 mb-2">Explore Rishikesh in 3D</h2>
-          <div className="w-16 h-1 bg-amber-400 mx-auto"></div>
-          <p className="text-slate-300 mt-4 max-w-2xl mx-auto">
-            Discover sacred sites and adventure spots along the Ganges
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-amber-300 mb-3">
+            Explore Rishikesh in 3D
+          </h2>
+          <div className="w-16 h-1 bg-amber-400 mx-auto mb-4 rounded"></div>
+          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto">
+            Discover sacred sites and adventure hotspots along the Ganges River with a 3D immersive experience.
           </p>
         </div>
 
-        <div className={`relative rounded-2xl overflow-hidden shadow-2xl border-2 border-amber-400/20 transition-all duration-500 ${isExpanded ? 'h-[600px]' : 'h-[450px]'}`}>
-          <div className="absolute inset-0 bg-slate-700 flex items-center justify-center">
-            <iframe
-              title="Bhoothnath Temple 3D Map"
-              src="https://www.google.com/maps/embed?pb=!4v1683301701815!6m8!1m7!1sCAoSLEFGMVFpcFBqZ1E1M0I0bHdaVjV1VmFDdFlBcV9hVkdONk5MNzNHMjlH!2m2!1d30.0901!2d78.2677!3f170.06!4f-4.72!5f0.7820865974627469"
+        {/* Controls */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6">
+          <select
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-amber-400"
+          >
+            {HOTSPOTS.map((place: string) => (
+              <option key={place} value={place}>
+                {place}
+              </option>
+            ))}
+          </select>
 
-              width="100%"
-              height="100%"
-              className="border-0"
-              allowFullScreen
-              loading="lazy"
-            />
-          </div>
+          <input
+            type="text"
+            value={manualSearch}
+            onChange={(e) => setManualSearch(e.target.value)}
+            placeholder="Or enter any location"
+            className="px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-amber-400 flex-grow max-w-xs"
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+          />
+
+          <select
+            value={mapStyle}
+            onChange={(e) => setMapStyle(e.target.value)}
+            className="px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-amber-400"
+          >
+            {STYLES.map((style: string) => (
+              <option key={style} value={style}>
+                {style.charAt(0).toUpperCase() + style.slice(1)}
+              </option>
+            ))}
+          </select>
 
           <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="absolute bottom-4 right-4 bg-slate-800/80 hover:bg-slate-700/90 text-amber-300 p-2 rounded-full border border-slate-600 shadow-lg backdrop-blur-sm"
+            onClick={handleSearch}
+            className="px-4 py-2 bg-amber-400 text-slate-900 font-semibold rounded-lg hover:bg-amber-300 transition"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isExpanded ? "M6 18L18 6M6 6l12 12" : "M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"} />
+            Search
+          </button>
+
+          <button
+            onClick={handleGeolocation}
+            className="px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-500 transition"
+          >
+            Use My Location
+          </button>
+        </div>
+
+        {/* Map Card */}
+        <div
+          className={`relative transition-all duration-500 ease-in-out border-2 border-amber-400/20 rounded-3xl overflow-hidden shadow-2xl ${
+            isExpanded ? "h-[550px] sm:h-[600px]" : "h-[350px] sm:h-[450px]"
+          }`}
+        >
+          <iframe
+            title="Interactive 3D Map"
+            src={mapUrl}
+            className="absolute inset-0 w-full h-full"
+            loading="lazy"
+            allowFullScreen
+          ></iframe>
+
+          {/* Expand Button */}
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="absolute bottom-4 right-4 p-2 sm:p-3 bg-slate-800/80 hover:bg-slate-700/90 text-amber-300 border border-slate-600 rounded-full backdrop-blur-md shadow-md transition duration-300"
+            aria-label={isExpanded ? "Collapse Map" : "Expand Map"}
+          >
+            <svg
+              className="w-5 h-5 sm:w-6 sm:h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={isExpanded ? "M6 18L18 6M6 6l12 12" : "M12 4v16m8-8H4"}
+              />
             </svg>
           </button>
         </div>
@@ -149,6 +261,7 @@ const Interactive3DMap: React.FC = () => {
 };
 
 
+
 const BoatAnimation: React.FC = () => {
   const boatRef = useRef<HTMLDivElement>(null);
 
@@ -156,8 +269,9 @@ const BoatAnimation: React.FC = () => {
     const handleScroll = () => {
       if (!boatRef.current) return;
       const offset = window.scrollY * 0.2;
-      boatRef.current.style.transform = `translateX(calc(-50% + ${offset}px))`;
+      boatRef.current.style.transform = `translateX(calc(-50% + ${offset}px)) rotateY(8deg)`;
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -165,15 +279,37 @@ const BoatAnimation: React.FC = () => {
   return (
     <div
       ref={boatRef}
-      className="fixed bottom-16 left-1/2 w-28 h-14 z-40"
-      style={{ transform: "translateX(-50%)", transition: "transform 0.2s ease-out" }}
+      className="fixed bottom-16 left-1/2 z-50 w-20 h-12 sm:w-28 sm:h-16 md:w-32 md:h-20 transition-transform duration-200 ease-out"
+      style={{ transform: "translateX(-50%) rotateY(8deg)" }}
     >
-      <svg viewBox="0 0 84 44" className="w-full h-full drop-shadow-lg">
-        <path d="M2 40 L82 40 L74 44 L10 44 Z" fill="#8B4513" />
-        <path d="M20 40 L42 20 L64 40 Z" fill="#FFF" />
-        <circle cx="56" cy="36" r="2" fill="#FFD700" />
-      </svg>
-      <div className="absolute -bottom-1 left-0 right-0 h-2 bg-blue-400/20 blur-md animate-[ripple_3s_linear_infinite]"></div>
+      {/* Boat Body */}
+      <div className="relative w-full h-full">
+        <svg
+          viewBox="0 0 84 44"
+          className="w-full h-full drop-shadow-xl"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Wooden base */}
+          <path
+            d="M2 40 L82 40 L74 44 L10 44 Z"
+            fill="#8B4513"
+            stroke="#5C3317"
+            strokeWidth="1"
+          />
+          {/* Sail */}
+          <path
+            d="M20 40 L42 10 L64 40 Z"
+            fill="#F5F5F5"
+            stroke="#DDD"
+            strokeWidth="0.8"
+          />
+          {/* Sun ornament or detail */}
+          <circle cx="56" cy="34" r="2.5" fill="#FFD700" />
+        </svg>
+
+        {/* Water ripple effect below */}
+        <div className="absolute -bottom-1 left-0 right-0 h-2 bg-blue-400/30 blur-sm animate-[ripple_3s_linear_infinite] rounded-full"></div>
+      </div>
     </div>
   );
 };
@@ -216,25 +352,25 @@ const TestimonialCarousel: React.FC = () => {
   const next = () => setCurrent((c) => (c + 1) % testimonials.length);
 
   return (
-    <section className="py-16 bg-gradient-to-b from-slate-800 to-slate-900 relative overflow-hidden" id="testimonials">
+    <section className="py-12 md:py-16 bg-gradient-to-b from-slate-800 to-slate-900 relative overflow-hidden" id="testimonials">
       <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-amber-400/5 blur-3xl"></div>
-      
+
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-amber-300 mb-2">Visitor Experiences</h2>
+        <div className="text-center mb-10 md:mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-amber-300 mb-2">Visitor Experiences</h2>
           <div className="w-16 h-1 bg-amber-400 mx-auto"></div>
-          <p className="text-slate-300 mt-4 max-w-2xl mx-auto">
+          <p className="text-slate-300 mt-4 text-sm md:text-base max-w-2xl mx-auto">
             Hear from travelers who've experienced the magic of Rishikesh
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto relative">
-          <div className="bg-slate-800/70 backdrop-blur-sm p-8 rounded-xl border border-slate-700/50 shadow-xl">
-            <div className="flex mb-4">
+        <div className="max-w-2xl md:max-w-4xl mx-auto relative px-2 sm:px-4">
+          <div className="bg-slate-800/70 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-slate-700/50 shadow-xl">
+            <div className="flex mb-4 justify-center">
               {[...Array(5)].map((_, i) => (
                 <svg
                   key={i}
-                  className={`w-5 h-5 ${i < testimonials[current].rating ? 'text-amber-400' : 'text-slate-600'}`}
+                  className={`w-4 h-4 sm:w-5 sm:h-5 ${i < testimonials[current].rating ? 'text-amber-400' : 'text-slate-600'}`}
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -242,19 +378,20 @@ const TestimonialCarousel: React.FC = () => {
                 </svg>
               ))}
             </div>
-            <blockquote className="italic text-lg text-slate-200 mb-6 leading-relaxed">
+
+            <blockquote className="italic text-base sm:text-lg text-slate-200 mb-6 leading-relaxed text-center">
               "{testimonials[current].quote}"
             </blockquote>
-            <p className="font-semibold text-amber-400">
+            <p className="font-semibold text-amber-400 text-center">
               — {testimonials[current].author}
             </p>
 
-            <div className="flex justify-center mt-8 space-x-2">
+            <div className="flex justify-center mt-6 space-x-2">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className={`w-3 h-3 rounded-full transition-all ${
+                  className={`w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full transition-all ${
                     i === current ? "bg-amber-400 scale-125" : "bg-slate-600"
                   }`}
                 />
@@ -262,20 +399,23 @@ const TestimonialCarousel: React.FC = () => {
             </div>
           </div>
 
+          {/* Prev Button */}
           <button
             onClick={prev}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 p-2 rounded-full bg-slate-700/80 hover:bg-slate-600 text-amber-300 shadow-lg border border-slate-600"
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 p-2 md:p-2.5 rounded-full bg-slate-700/80 hover:bg-slate-600 text-amber-300 shadow-lg border border-slate-600"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
+            <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
+
+          {/* Next Button */}
           <button
             onClick={next}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 p-2 rounded-full bg-slate-700/80 hover:bg-slate-600 text-amber-300 shadow-lg border border-slate-600"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 md:p-2.5 rounded-full bg-slate-700/80 hover:bg-slate-600 text-amber-300 shadow-lg border border-slate-600"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+            <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>
@@ -284,54 +424,8 @@ const TestimonialCarousel: React.FC = () => {
   );
 };
 
-const BackgroundMantra: React.FC = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
 
-  const toggleMantra = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
 
-  return (
-    <div className="fixed top-5 right-5 z-50">
-      <button
-        onClick={toggleMantra}
-        className={`flex items-center justify-center gap-2 ${
-          isPlaying 
-            ? "bg-amber-600/90 text-white shadow-lg shadow-amber-400/30"
-            : "bg-slate-800/80 text-amber-300 border border-slate-700 hover:border-amber-400"
-        } font-medium py-1.5 px-2.45 rounded-full hover:shadow-md transition-all duration-300 backdrop-blur-sm`}
-      >
-        {isPlaying ? (
-          <>
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-            </span>
-            Pause Mantra
-          </>
-        ) : (
-          <>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-            </svg>
-            Play Mantra
-          </>
-        )}
-      </button>
-      <audio ref={audioRef} loop>
-        <source src={mantra} type="audio/mp3" />
-      </audio>
-    </div>
-  );
-};
 
 const WeatherWidget: React.FC = () => {
   const [weather, setWeather] = useState({
@@ -342,32 +436,64 @@ const WeatherWidget: React.FC = () => {
     updatedAt: new Date().toLocaleTimeString(),
   });
 
-  // Dummy auto-refresh every 30 seconds (simulate update)
+  const fetchWeather = async () => {
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=Rishikesh&appid=f4bda24d4fde692db50f38ec11c1b1b2&units=metric`
+      );
+      const data = await response.json();
+      
+      if (response.ok) {
+        setWeather(prev => ({
+          ...prev,
+          temp: Math.round(data.main.temp),
+          condition: data.weather[0].main,
+          icon: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+          updatedAt: new Date().toLocaleTimeString(),
+        }));
+      }
+    } catch (error) {
+      console.error("Error fetching weather:", error);
+    }
+  };
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setWeather((prev) => ({
-        ...prev,
-        updatedAt: new Date().toLocaleTimeString(),
-      }));
-    }, 30000);
+    fetchWeather();
+    const interval = setInterval(fetchWeather, 300000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="fixed bottom-4 left-4 z-50 bg-slate-800/80 backdrop-blur-sm rounded-2xl p-4 border border-slate-700 shadow-xl w-64">
-      <div className="flex items-center gap-4">
-        <span className="text-3xl">{weather.icon}</span>
-        <div>
-          <p className="text-sm text-amber-300">{weather.location}</p>
-          <p className="text-white font-semibold text-lg">
-            {weather.temp}°C | {weather.condition}
+    <div className="fixed bottom-16 sm:bottom-4 left-4 right-4 sm:right-auto z-50 
+           bg-slate-800/80 backdrop-blur-md rounded-xl px-3 py-2 border border-slate-700 
+           shadow-xl w-[calc(100%-2rem)] sm:w-64 sm:max-w-xs sm:px-4 sm:py-3 sm:rounded-2xl
+           mx-auto sm:mx-0">
+      <div className="flex items-center gap-2 sm:gap-3">
+        {weather.icon.startsWith('http') ? (
+          <img 
+            src={weather.icon} 
+            alt={weather.condition} 
+            className="w-8 h-8 sm:w-12 sm:h-12"
+          />
+        ) : (
+          <span className="text-2xl sm:text-3xl">{weather.icon}</span>
+        )}
+        <div className="flex-1">
+          <p className="text-xs text-amber-300 sm:text-sm">{weather.location}</p>
+          <p className="text-white font-semibold text-sm sm:text-base">
+            {weather.temp}°C | <span className="text-xs sm:text-sm">{weather.condition}</span>
           </p>
-          <p className="text-xs text-slate-400">Updated at {weather.updatedAt}</p>
+          <p className="text-[10px] text-slate-400 sm:text-xs">
+            Updated at {weather.updatedAt}
+          </p>
         </div>
       </div>
     </div>
   );
 };
+
+
+
 
 
 const PilgrimCounter: React.FC = () => {
@@ -394,5 +520,127 @@ const PilgrimCounter: React.FC = () => {
     </div>
   );
 };
+
+
+
+interface Message {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+const TouristChatbot: React.FC = () => {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSend = async () => {
+    if (!input.trim()) return;
+
+    const newUserMessage: Message = { role: 'user', content: input };
+    const updatedMessages = [...messages, newUserMessage];
+    setMessages(updatedMessages);
+    setInput('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('http://localhost:4000/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [
+            { role: 'system', content: 'You are a helpful tourist guide.' },
+            ...updatedMessages,
+          ],
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch AI response');
+      }
+
+      const data = await res.json();
+      console.log('Response from backend:', data);
+
+      const replyContent =
+        data?.choices?.[0]?.message?.content?.trim() ||
+        'Sorry, I didn’t get that.';
+
+      const botReply: Message = {
+        role: 'assistant',
+        content: replyContent,
+      };
+
+      setMessages([...updatedMessages, botReply]);
+    } catch (error) {
+      console.error('Error:', error);
+
+      const errorMessage: Message = {
+        role: 'assistant',
+        content: 'Network error or server is unavailable.',
+      };
+
+      setMessages([...updatedMessages, errorMessage]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSend();
+    }
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-between h-screen w-full p-4 bg-gradient-to-b from-blue-100 to-white">
+      <h1 className="text-2xl font-bold mb-4 text-blue-700">GuideBot 🧭</h1>
+
+      <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-4 flex flex-col space-y-3 overflow-y-auto max-h-[70vh]">
+        {messages.map((msg, idx) => (
+          <div
+            key={idx}
+            className={`p-3 rounded-lg max-w-[80%] text-sm whitespace-pre-wrap ${
+              msg.role === 'user'
+                ? 'bg-blue-100 self-end text-right'
+                : 'bg-gray-100 self-start text-left'
+            }`}
+          >
+            {msg.content}
+          </div>
+        ))}
+        {loading && (
+          <div className="text-gray-400 text-sm">GuideBot is typing...</div>
+        )}
+      </div>
+
+      <div className="w-full max-w-md flex items-center gap-2 mt-4">
+        <input
+          type="text"
+          placeholder="Ask about a place..."
+          className="flex-1 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          value={input}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
+        <button
+          onClick={handleSend}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all"
+          disabled={loading}
+        >
+          Send
+        </button>
+      </div>
+    </div>
+  );
+};
+
+
+
 
 export default LandingPage;

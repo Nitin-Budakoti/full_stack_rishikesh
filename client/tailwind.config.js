@@ -16,16 +16,21 @@ module.exports = {
           '0%': { transform: 'rotateY(0deg)' },
           '100%': { transform: 'rotateY(360deg)' },
         },
+        // 🌊 Ripple effect under the boat
+        ripple: {
+          '0%, 100%': { transform: 'scaleX(1)' },
+          '50%': { transform: 'scaleX(1.1)' },
+        },
       },
       animation: {
-        slide: 'slide 15s linear infinite',          // Use in className as animate-slide
+        slide: 'slide 15s linear infinite',          // For continuous sliders
         spinCarousel: 'spinCarousel 40s linear infinite', // Optional 3D carousel animation
+        ripple: 'ripple 3s linear infinite',          // For boat water ripple effect
       },
       fontFamily: {
         dancing: ['"Dancing Script"', 'cursive'], // Use className="font-dancing"
       },
       perspective: {
-        // 👁️ Optional custom utility (use via className if needed)
         '1000': '1000px',
       },
     },
