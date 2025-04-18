@@ -71,7 +71,7 @@ const Header = () => {
               <div className="ml-4 hidden md:block">
                 <NavLink
                   to="/login"
-                  className="text-sm font-semibold px-5 py-2 rounded-xl bg-gradient-to-tr from-yellow-400 to-yellow-300 text-gray-900 shadow-md border border-yellow-500 hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300"
+                  className="text-sm font-semibold px-4 py-1.5 rounded-xl bg-gradient-to-tr from-yellow-400 to-yellow-300 text-gray-900 shadow-md border border-yellow-500 hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300"
                 >
                   Login
                 </NavLink>
