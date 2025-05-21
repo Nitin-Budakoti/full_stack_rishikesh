@@ -9,14 +9,15 @@ const images = [i6, i1, i2, i3, i4, i5];
 
 const ImageSlider = () => {
   return (
-    <div className="w-full pt-14 pb-6 bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col items-center relative z-0 overflow-hidden">
+    <div className="w-full pt-10 pb-6 bg-gradient-to-b from-[#E0F7FA] to-[#80DEEA] flex flex-col items-center relative z-0 overflow-hidden">
       {/* 🌟 Heading */}
-      <h2 className="relative text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 px-6 py-4 bg-gradient-to-r from-cyan-100 via-white to-cyan-100 rounded-xl shadow-md tracking-wide">
-        <span className="font-serif text-gray-800">
-          <span className="text-[#008B8B] drop-shadow-md">Explore the </span>
-          <span className="font-dancing text-[#5F9EA0] drop-shadow-lg">
-            Rishikesh Adventures
-          </span>
+      <h2 className="relative text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 px-6 py-4 bg-gradient-to-r from-[#80DEEA] to-[#2A9D8F] text-white rounded-xl shadow-lg tracking-wide">
+        <span className="font-serif text-white">
+          <span className="text-[#F4A261] drop-shadow-md">Explore the </span>
+          <span className="font-dancing text-white drop-shadow-lg">
+  Rishikesh Adventures
+</span>
+
         </span>
       </h2>
 
@@ -33,11 +34,11 @@ const ImageSlider = () => {
                 perspective: "1000px",
               }}
             >
-              <div className="relative w-full h-full rounded-2xl shadow-xl bg-white border border-gray-200 group-hover:z-20">
+              <div className="relative w-full h-full rounded-2xl shadow-lg bg-white border border-[#2A9D8F] group-hover:z-20">
                 <img
                   src={img}
                   alt={`slider-${index}`}
-                  className="w-full h-full object-cover rounded-2xl transform transition duration-700 ease-in-out group-hover:scale-125 group-hover:rotate-2 group-hover:shadow-[0_15px_30px_rgba(0,0,0,0.4)] group-hover:border-4 group-hover:border-cyan-400"
+                  className="w-full h-full object-cover rounded-2xl transform transition duration-700 ease-in-out group-hover:scale-110 group-hover:rotate-2 group-hover:shadow-[0_25px_50px_rgba(0,0,0,0.2)] group-hover:border-4 group-hover:border-[#F4A261]"
                 />
               </div>
             </div>

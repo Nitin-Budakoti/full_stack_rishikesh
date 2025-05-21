@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useRef,ChangeEvent,KeyboardEvent  } from "react";
+import React, {  useEffect, useRef, useState } from "react";
 import ImageSlider from "./imageSlider";
 import YogaSlider from "./YogaSlider";
+import ChatbaseWidget from "./ChatbaseWidget";
 import ShoppingRishikesh from "./ShoppingRishikesh";
 import boothnathTemple from "../assets/boothnathTemple.jpg";
 import img_1 from "../assets/img_1.jpg";
@@ -11,27 +12,26 @@ import img_8 from "../assets/img_8.jpg";
 // import { FiSend } from 'react-icons/fi';
 // import { BsRobot, BsPerson } from 'react-icons/bs';
 
-
 const LandingPage: React.FC = () => {
   return (
-    <div className=" pb-32 relative overflow-hidden bg-slate-900">
-      {/* Background elements */}
+    <div className="pb-32 relative overflow-hidden bg-gradient-to-b from-slate-800 to-slate-900">
+      {/* Background Elements */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/rice-paper.png')] opacity-20"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/30 to-slate-900/80"></div>
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/rice-paper.png')] opacity-25"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-800/90 via-slate-800/60 to-slate-800/90"></div>
       </div>
       
       {/* Animated Ganga river effect */}
-      <div className="fixed top-0 left-0 right-0 h-64 -z-10 opacity-15">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/water.png')] animate-[waterFlow_20s_linear_infinite]"></div>
+      <div className="fixed top-0 left-0 right-0 h-64 -z-10 opacity-20">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/water.png')] animate-[waterFlow_20s_linear_infinite] opacity-30"></div>
       </div>
 
       {/* Himalayan peaks silhouette */}
-      <div className="fixed bottom-0 left-0 right-0 h-64 -z-10 bg-[url('https://i.imgur.com/JYw5FyK.png')] bg-bottom bg-contain bg-repeat-x opacity-15"></div>
+      <div className="fixed bottom-0 left-0 right-0 h-64 -z-10 bg-[url('https://i.imgur.com/JYw5FyK.png')] bg-bottom bg-contain bg-repeat-x opacity-20"></div>
 
       {/* Floating diya lights */}
-      <div className="fixed top-1/4 left-10 w-8 h-8 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-400/80 to-transparent rounded-full blur-[1px] animate-float"></div>
-      <div className="fixed top-1/3 right-20 w-6 h-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-300/70 to-transparent rounded-full blur-[1px] animate-float animation-delay-2000"></div>
+      <div className="fixed top-1/4 left-10 w-8 h-8 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-400/90 to-transparent rounded-full blur-[2px] animate-float"></div>
+      <div className="fixed top-1/3 right-20 w-6 h-6 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-300/90 to-transparent rounded-full blur-[2px] animate-float animation-delay-2000"></div>
 
       <HeroSection />
       <ImageSlider />
@@ -40,9 +40,8 @@ const LandingPage: React.FC = () => {
       <Interactive3DMap />
       <TestimonialCarousel />
       <BoatAnimation />
-      <TouristChatbot />
+      <ChatbaseWidget />
       <WeatherWidget />
-      <PilgrimCounter />
     </div>
   );
 };
@@ -68,21 +67,23 @@ const HeroSection: React.FC = () => {
       }}
     >
       {/* Decorative border elements */}
-      <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
-      
+      <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+
       <div className="relative z-10 text-center px-4 max-w-4xl">
         <div className="mb-8">
-          <h2 className="text-lg font-light tracking-widest text-amber-300 mb-2">THE GATEWAY TO THE GARHWAL HIMALAYAS</h2>
-          <h1 className="text-6xl font-bold mb-4 font-serif bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-400">
+          <h2 className="text-lg font-light tracking-widest text-amber-300 mb-2">
+            THE GATEWAY TO THE GARHWAL HIMALAYAS
+          </h2>
+          <h1 className="text-6xl font-extrabold mb-4 font-serif bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-400">
             Rishikesh
           </h1>
-          <div className="w-24 h-1 bg-amber-400 mx-auto my-6"></div>
+          <div className="w-24 h-1 bg-amber-500 mx-auto my-6"></div>
           <p className="text-xl text-amber-100 max-w-2xl mx-auto leading-relaxed">
             Where spirituality meets adventure in the lap of the Himalayas
           </p>
         </div>
-        
+
         <div className="flex gap-4 justify-center">
           <button className="bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-amber-500/30 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -95,7 +96,7 @@ const HeroSection: React.FC = () => {
           </button>
         </div>
       </div>
-      
+
       {/* Scrolling indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <svg className="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -155,27 +156,35 @@ const Interactive3DMap: React.FC = () => {
   }, [mapStyle]);
 
   return (
-    <section id="map" className="relative overflow-hidden py-16 bg-slate-800/90 backdrop-blur-sm">
+    <section
+      id="map"
+      className="relative overflow-hidden py-20 bg-gradient-to-r from-[#E0F7FA]/70 to-[#80DEEA]/70 backdrop-blur-md"
+    >
       {/* Decorative Glow */}
-      <div className="absolute -top-24 -right-24 w-72 h-72 bg-amber-400/10 rounded-full blur-3xl z-0"></div>
+      <div className="absolute -top-24 -right-24 w-72 h-72 bg-[#F4A261]/30 rounded-full blur-3xl z-0"></div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-amber-300 mb-3">
-            Explore Rishikesh in 3D
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 drop-shadow-lg tracking-wide">
+            Explore
+            <span className="text-[#F4A261] font-dancing drop-shadow-md ml-2">
+              Rishikesh Adventures
+            </span>
           </h2>
-          <div className="w-16 h-1 bg-amber-400 mx-auto mb-4 rounded"></div>
-          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto">
-            Discover sacred sites and adventure hotspots along the Ganges River with a 3D immersive experience.
+          <div className="w-16 h-1 bg-[#F4A261] mx-auto my-4 rounded-full"></div>
+          <p className="text-slate-100 text-base sm:text-lg max-w-2xl mx-auto">
+            Discover sacred sites and adventure hotspots along the Ganges River
+            with a stunning 3D immersive experience.
           </p>
         </div>
 
         {/* Controls */}
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
           <select
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-amber-400"
+            className="px-4 py-2 rounded-xl bg-white/90 text-slate-800 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#F4A261] shadow-md"
           >
             {HOTSPOTS.map((place: string) => (
               <option key={place} value={place}>
@@ -189,14 +198,14 @@ const Interactive3DMap: React.FC = () => {
             value={manualSearch}
             onChange={(e) => setManualSearch(e.target.value)}
             placeholder="Or enter any location"
-            className="px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-amber-400 flex-grow max-w-xs"
-            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+            className="px-4 py-2 rounded-xl bg-white/90 text-slate-800 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#F4A261] shadow-md flex-grow max-w-xs"
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           />
 
           <select
             value={mapStyle}
             onChange={(e) => setMapStyle(e.target.value)}
-            className="px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-amber-400"
+            className="px-4 py-2 rounded-xl bg-white/90 text-slate-800 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#F4A261] shadow-md"
           >
             {STYLES.map((style: string) => (
               <option key={style} value={style}>
@@ -207,14 +216,14 @@ const Interactive3DMap: React.FC = () => {
 
           <button
             onClick={handleSearch}
-            className="px-4 py-2 bg-amber-400 text-slate-900 font-semibold rounded-lg hover:bg-amber-300 transition"
+            className="px-5 py-2.5 bg-[#F4A261] text-white font-semibold rounded-xl hover:bg-[#e07b3c] transition shadow-lg"
           >
             Search
           </button>
 
           <button
             onClick={handleGeolocation}
-            className="px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-500 transition"
+            className="px-5 py-2.5 bg-slate-700/80 text-white rounded-xl hover:bg-slate-600 transition shadow-lg"
           >
             Use My Location
           </button>
@@ -222,14 +231,14 @@ const Interactive3DMap: React.FC = () => {
 
         {/* Map Card */}
         <div
-          className={`relative transition-all duration-500 ease-in-out border-2 border-amber-400/20 rounded-3xl overflow-hidden shadow-2xl ${
+          className={`relative transition-all duration-700 ease-in-out border-2 border-[#F4A261]/40 rounded-3xl overflow-hidden shadow-2xl ${
             isExpanded ? "h-[550px] sm:h-[600px]" : "h-[350px] sm:h-[450px]"
           }`}
         >
           <iframe
             title="Interactive 3D Map"
             src={mapUrl}
-            className="absolute inset-0 w-full h-full"
+            className="absolute inset-0 w-full h-full rounded-3xl"
             loading="lazy"
             allowFullScreen
           ></iframe>
@@ -237,11 +246,11 @@ const Interactive3DMap: React.FC = () => {
           {/* Expand Button */}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="absolute bottom-4 right-4 p-2 sm:p-3 bg-slate-800/80 hover:bg-slate-700/90 text-amber-300 border border-slate-600 rounded-full backdrop-blur-md shadow-md transition duration-300"
+            className="absolute bottom-5 right-5 p-3 bg-white/80 hover:bg-white/90 text-[#F4A261] border border-white rounded-full backdrop-blur-md shadow-md transition duration-300"
             aria-label={isExpanded ? "Collapse Map" : "Expand Map"}
           >
             <svg
-              className="w-5 h-5 sm:w-6 sm:h-6"
+              className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -262,58 +271,87 @@ const Interactive3DMap: React.FC = () => {
 
 
 
+
 const BoatAnimation: React.FC = () => {
   const boatRef = useRef<HTMLDivElement>(null);
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    // Get window width to handle full screen movement
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       if (!boatRef.current) return;
-      const offset = window.scrollY * 0.2;
-      boatRef.current.style.transform = `translateX(calc(-50% + ${offset}px)) rotateY(8deg)`;
+      const scrollY = window.scrollY;
+      const moveX = (scrollY * 0.5) % (windowWidth + 200); // 200 is buffer for boat size
+
+      boatRef.current.style.transform = `translateX(${moveX - 100}px) rotateY(8deg)`; 
+      // start slightly off left (-100px) to fully come from left side
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [windowWidth]);
 
   return (
     <div
       ref={boatRef}
-      className="fixed bottom-16 left-1/2 z-50 w-20 h-12 sm:w-28 sm:h-16 md:w-32 md:h-20 transition-transform duration-200 ease-out"
-      style={{ transform: "translateX(-50%) rotateY(8deg)" }}
+      className="fixed bottom-20 left-0 z-50 w-24 h-16 sm:w-32 sm:h-20 md:w-40 md:h-24 transition-transform duration-100 ease-linear pointer-events-none"
+      style={{ transform: "translateX(-100px) rotateY(8deg)" }}
     >
-      {/* Boat Body */}
-      <div className="relative w-full h-full">
-        <svg
-          viewBox="0 0 84 44"
-          className="w-full h-full drop-shadow-xl"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/* Wooden base */}
-          <path
-            d="M2 40 L82 40 L74 44 L10 44 Z"
-            fill="#8B4513"
-            stroke="#5C3317"
-            strokeWidth="1"
-          />
-          {/* Sail */}
-          <path
-            d="M20 40 L42 10 L64 40 Z"
-            fill="#F5F5F5"
-            stroke="#DDD"
-            strokeWidth="0.8"
-          />
-          {/* Sun ornament or detail */}
-          <circle cx="56" cy="34" r="2.5" fill="#FFD700" />
-        </svg>
-
-        {/* Water ripple effect below */}
-        <div className="absolute -bottom-1 left-0 right-0 h-2 bg-blue-400/30 blur-sm animate-[ripple_3s_linear_infinite] rounded-full"></div>
-      </div>
+      {/* Boat SVG */}
+      <svg
+        viewBox="0 0 128 64"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full h-full drop-shadow-2xl"
+      >
+        {/* Water Ripple */}
+        <ellipse
+          cx="64"
+          cy="58"
+          rx="60"
+          ry="6"
+          fill="#60A5FA"
+          opacity="0.4"
+        />
+        {/* Boat Base */}
+        <path
+          d="M10 40 Q64 60 118 40 L110 50 Q64 70 18 50 Z"
+          fill="#8B4513"
+          stroke="#5C3317"
+          strokeWidth="2"
+        />
+        {/* Mast */}
+        <rect x="62" y="10" width="4" height="30" fill="#5C3317" />
+        {/* Left Sail */}
+        <path
+          d="M64 12 L30 38 L64 38 Z"
+          fill="#F3F4F6"
+          stroke="#D1D5DB"
+          strokeWidth="1"
+        />
+        {/* Right Sail */}
+        <path
+          d="M64 12 L98 38 L64 38 Z"
+          fill="#E5E7EB"
+          stroke="#D1D5DB"
+          strokeWidth="1"
+        />
+        {/* Decoration */}
+        <circle cx="92" cy="30" r="3" fill="#FACC15" />
+      </svg>
     </div>
   );
 };
-
 const testimonials = [
   {
     quote: "Serene riverside destination known for its systematic evening ritual and spiritual ambiance.",
@@ -341,10 +379,10 @@ const TestimonialCarousel: React.FC = () => {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => {
-      setCurrent((c) => (c + 1) % testimonials.length);
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % testimonials.length);
     }, 5000);
-    return () => clearInterval(t);
+    return () => clearInterval(interval);
   }, []);
 
   const prev = () =>
@@ -352,25 +390,30 @@ const TestimonialCarousel: React.FC = () => {
   const next = () => setCurrent((c) => (c + 1) % testimonials.length);
 
   return (
-    <section className="py-12 md:py-16 bg-gradient-to-b from-slate-800 to-slate-900 relative overflow-hidden" id="testimonials">
-      <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-amber-400/5 blur-3xl"></div>
+    <section className="py-16 bg-gradient-to-b from-sky-200 via-sky-100 to-sky-50 relative overflow-hidden" id="testimonials">
+      {/* Optional blurred background decorations */}
+      <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-sky-300/20 blur-3xl"></div>
+      <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-sky-300/20 blur-3xl"></div>
 
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-10 md:mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-amber-300 mb-2">Visitor Experiences</h2>
-          <div className="w-16 h-1 bg-amber-400 mx-auto"></div>
-          <p className="text-slate-300 mt-4 text-sm md:text-base max-w-2xl mx-auto">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-14">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-sky-600">Visitor Experiences</h2>
+          <div className="w-20 h-1 bg-sky-400 mx-auto my-4 rounded"></div>
+          <p className="text-slate-600 max-w-2xl mx-auto text-base md:text-lg">
             Hear from travelers who've experienced the magic of Rishikesh
           </p>
         </div>
 
-        <div className="max-w-2xl md:max-w-4xl mx-auto relative px-2 sm:px-4">
-          <div className="bg-slate-800/70 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-slate-700/50 shadow-xl">
-            <div className="flex mb-4 justify-center">
+        <div className="relative max-w-3xl mx-auto">
+          <div className="bg-white/70 backdrop-blur-md p-8 md:p-10 rounded-2xl border border-sky-200 shadow-xl transition-all">
+            {/* Star Ratings */}
+            <div className="flex justify-center mb-6">
               {[...Array(5)].map((_, i) => (
                 <svg
                   key={i}
-                  className={`w-4 h-4 sm:w-5 sm:h-5 ${i < testimonials[current].rating ? 'text-amber-400' : 'text-slate-600'}`}
+                  className={`w-5 h-5 md:w-6 md:h-6 ${
+                    i < testimonials[current].rating ? "text-sky-500" : "text-slate-300"
+                  }`}
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -379,42 +422,43 @@ const TestimonialCarousel: React.FC = () => {
               ))}
             </div>
 
-            <blockquote className="italic text-base sm:text-lg text-slate-200 mb-6 leading-relaxed text-center">
+            {/* Testimonial Text */}
+            <blockquote className="italic text-lg md:text-xl text-slate-700 text-center leading-relaxed mb-6">
               "{testimonials[current].quote}"
             </blockquote>
-            <p className="font-semibold text-amber-400 text-center">
-              — {testimonials[current].author}
-            </p>
 
-            <div className="flex justify-center mt-6 space-x-2">
+            {/* Author */}
+            <p className="font-semibold text-sky-600 text-center">— {testimonials[current].author}</p>
+
+            {/* Dots */}
+            <div className="flex justify-center mt-6 space-x-3">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className={`w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full transition-all ${
-                    i === current ? "bg-amber-400 scale-125" : "bg-slate-600"
+                  className={`w-3.5 h-3.5 rounded-full transition-all ${
+                    i === current ? "bg-sky-500 scale-125" : "bg-slate-300"
                   }`}
                 />
               ))}
             </div>
           </div>
 
-          {/* Prev Button */}
+          {/* Navigation Buttons */}
           <button
             onClick={prev}
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 p-2 md:p-2.5 rounded-full bg-slate-700/80 hover:bg-slate-600 text-amber-300 shadow-lg border border-slate-600"
+            className="absolute left-0 top-1/2 -translate-y-1/2 p-3 rounded-full bg-sky-300/70 hover:bg-sky-400 text-white border border-sky-400 shadow-md transition-all"
           >
-            <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
 
-          {/* Next Button */}
           <button
             onClick={next}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 md:p-2.5 rounded-full bg-slate-700/80 hover:bg-slate-600 text-amber-300 shadow-lg border border-slate-600"
+            className="absolute right-0 top-1/2 -translate-y-1/2 p-3 rounded-full bg-sky-300/70 hover:bg-sky-400 text-white border border-sky-400 shadow-md transition-all"
           >
-            <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>
           </button>
@@ -423,8 +467,6 @@ const TestimonialCarousel: React.FC = () => {
     </section>
   );
 };
-
-
 
 
 const WeatherWidget: React.FC = () => {
@@ -459,12 +501,12 @@ const WeatherWidget: React.FC = () => {
 
   useEffect(() => {
     fetchWeather();
-    const interval = setInterval(fetchWeather, 300000);
+    const interval = setInterval(fetchWeather, 300000); // refresh every 5 minutes
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="fixed bottom-16 sm:bottom-4 left-4 right-4 sm:right-auto z-50 
+    <div className="fixed bottom-4 right-4 z-40
            bg-slate-800/80 backdrop-blur-md rounded-xl px-3 py-2 border border-slate-700 
            shadow-xl w-[calc(100%-2rem)] sm:w-64 sm:max-w-xs sm:px-4 sm:py-3 sm:rounded-2xl
            mx-auto sm:mx-0">
@@ -491,156 +533,6 @@ const WeatherWidget: React.FC = () => {
     </div>
   );
 };
-
-
-
-
-
-const PilgrimCounter: React.FC = () => {
-  const [count, setCount] = useState(1248);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCount(prev => prev + Math.floor(Math.random() * 3));
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="fixed bottom-4 right-4 z-50 bg-slate-800/80 backdrop-blur-sm rounded-lg p-3 border border-amber-400/30 shadow-lg">
-      <div className="flex items-center gap-2">
-        <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-        </svg>
-        <div>
-          <p className="text-xs text-amber-300">Visitors Today</p>
-          <p className="text-white font-medium">{count.toLocaleString()}+</p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-
-
-interface Message {
-  role: 'user' | 'assistant';
-  content: string;
-}
-
-const TouristChatbot: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const handleSend = async () => {
-    if (!input.trim()) return;
-
-    const newUserMessage: Message = { role: 'user', content: input };
-    const updatedMessages = [...messages, newUserMessage];
-    setMessages(updatedMessages);
-    setInput('');
-    setLoading(true);
-
-    try {
-      const res = await fetch('http://localhost:4000/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          messages: [
-            { role: 'system', content: 'You are a helpful tourist guide.' },
-            ...updatedMessages,
-          ],
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error('Failed to fetch AI response');
-      }
-
-      const data = await res.json();
-      console.log('Response from backend:', data);
-
-      const replyContent =
-        data?.choices?.[0]?.message?.content?.trim() ||
-        'Sorry, I didn’t get that.';
-
-      const botReply: Message = {
-        role: 'assistant',
-        content: replyContent,
-      };
-
-      setMessages([...updatedMessages, botReply]);
-    } catch (error) {
-      console.error('Error:', error);
-
-      const errorMessage: Message = {
-        role: 'assistant',
-        content: 'Network error or server is unavailable.',
-      };
-
-      setMessages([...updatedMessages, errorMessage]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleSend();
-    }
-  };
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
-
-  return (
-    <div className="flex flex-col items-center justify-between h-screen w-full p-4 bg-gradient-to-b from-blue-100 to-white">
-      <h1 className="text-2xl font-bold mb-4 text-blue-700">GuideBot 🧭</h1>
-
-      <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-4 flex flex-col space-y-3 overflow-y-auto max-h-[70vh]">
-        {messages.map((msg, idx) => (
-          <div
-            key={idx}
-            className={`p-3 rounded-lg max-w-[80%] text-sm whitespace-pre-wrap ${
-              msg.role === 'user'
-                ? 'bg-blue-100 self-end text-right'
-                : 'bg-gray-100 self-start text-left'
-            }`}
-          >
-            {msg.content}
-          </div>
-        ))}
-        {loading && (
-          <div className="text-gray-400 text-sm">GuideBot is typing...</div>
-        )}
-      </div>
-
-      <div className="w-full max-w-md flex items-center gap-2 mt-4">
-        <input
-          type="text"
-          placeholder="Ask about a place..."
-          className="flex-1 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          value={input}
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
-        />
-        <button
-          onClick={handleSend}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all"
-          disabled={loading}
-        >
-          Send
-        </button>
-      </div>
-    </div>
-  );
-};
-
-
 
 
 export default LandingPage;

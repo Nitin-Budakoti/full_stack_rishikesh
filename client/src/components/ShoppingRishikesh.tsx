@@ -31,20 +31,21 @@ const ShoppingRishikesh = () => {
   };
 
   return (
-    <section className="w-full bg-gradient-to-br from-white to-gray-100 py-16 px-4 md:px-20">
+    <section className="w-full bg-gradient-to-br from-[#E0F7FA] to-[#80DEEA] py-16 px-4 md:px-20 mb-12">
+      {/* The "mb-12" ensures there is space below this section */}
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-bold text-center mb-12 text-[#4B5563]">
-          Shop Local in {" "}
-          <span className="text-[#008B8B] font-dancing">Rishikesh</span>
+        <h2 className="text-3xl md:text-5xl font-bold text-center mb-12 text-[#2A9D8F]">
+          Shop Local in{" "}
+          <span className="text-[#F4A261] font-dancing">Rishikesh</span>
         </h2>
 
         <div className="relative">
           {/* Arrow Left */}
           <button
             onClick={prev}
-            className="absolute -left-3 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2 hover:bg-gray-100 transition hidden md:flex"
+            className="absolute -left-3 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-2 hover:bg-[#80DEEA] transition hidden md:flex"
           >
-            <ChevronLeft className="w-6 h-6 text-gray-600" />
+            <ChevronLeft className="w-6 h-6 text-[#2A9D8F]" />
           </button>
 
           {/* Cards Container */}
@@ -65,10 +66,10 @@ const ShoppingRishikesh = () => {
                       className="w-full h-64 object-cover rounded-t-2xl"
                     />
                     <div className="p-5">
-                      <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                      <h3 className="text-xl font-semibold text-[#2A9D8F] mb-2">
                         {item.title}
                       </h3>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-[#4B5563]">
                         Discover the authentic charm of Rishikesh through its vibrant local goods.
                       </p>
                     </div>
@@ -81,13 +82,13 @@ const ShoppingRishikesh = () => {
           {/* Arrow Right */}
           <button
             onClick={next}
-            className="absolute -right-3 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow-md rounded-full p-2 hover:bg-gray-100 transition hidden md:flex"
+            className="absolute -right-3 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-2 hover:bg-[#80DEEA] transition hidden md:flex"
           >
-            <ChevronRight className="w-6 h-6 text-gray-600" />
+            <ChevronRight className="w-6 h-6 text-[#2A9D8F]" />
           </button>
         </div>
       </div>
-    </section>  
+    </section>
   );
 };
 
