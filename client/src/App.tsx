@@ -4,6 +4,7 @@ function App() {
   return (
     <>
         <Layout/>   
+        <h1>hi</h1>
     </>
   )
 }
