@@ -3,7 +3,7 @@
     /* Basic Options */
     "target": "ES2020",                   // Modern JS target
     "module": "commonjs",                 // For Node.js
-    "rootDir": "./src",                   // Your TypeScript source folder
+    "rootDir": ".",                   // Your TypeScript source folder
     "outDir": "./dist",                   // Compiled output folder
     "esModuleInterop": true,              // Enables default import compatibility
     "forceConsistentCasingInFileNames": true,

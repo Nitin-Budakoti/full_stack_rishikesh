@@ -7,11 +7,14 @@ import Ashram from './Ashram';
 import Shop from './Shop';
 import ScrollToTop from './ScrollToTop'; // <-- Important
 import mantra from '../assets/mantra.mp3';
+import Deal from './Deal';
+import Success from '../Pages/Success';
+import Cancel from '../Pages/Cancel';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);  
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -171,6 +174,9 @@ const Header = () => {
             <Route path="/adventure" element={<Adventure />} />
             <Route path="/ashrams" element={<Ashram />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/hotels/deal" element={<Deal />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/cancel" element={<Cancel />} /> 
           </Routes>
         </main>
 
