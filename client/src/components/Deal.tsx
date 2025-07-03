@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import i5 from '../assets/i5.jpg';
 
-const stripePromise = loadStripe('pk_test_51RgmyqCrzpJs0Mrde1kXY9onzGH4EyxrlwMPgpEl2ChpSoUEmxrmspQK3fu7R9i33P3C6iaC2NoYBHSlc7A89m0E00WSZnNA2P'); 
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
 
 const Deal = () => {
   const roomOptions = [
