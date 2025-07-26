@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import i5 from '../assets/i5.jpg';
 
-
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-
 
 const Deal = () => {
   const roomOptions = [
@@ -33,11 +31,13 @@ const Deal = () => {
     return acc;
   }, {} as Record<string, number>);
 
-  const [quantities, setQuantities] = useState<Record<string, number>>(initialQuantities);
+  const [quantities, setQuantities] = useState(initialQuantities);
   const [showModal, setShowModal] = useState(false);
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [numberOfPeople, setNumberOfPeople] = useState('');
+  const [checkInDate, setCheckInDate] = useState('');
+  const [checkOutDate, setCheckOutDate] = useState('');
 
   const handleQuantityChange = (roomName: string, value: number) => {
     setQuantities((prev) => ({ ...prev, [roomName]: value }));
@@ -49,13 +49,13 @@ const Deal = () => {
   }, 0);
 
   const handleBookingSubmit = async () => {
-    if (!customerName || !customerPhone || !numberOfPeople) {
-      alert("Please fill all user details.");
+    if (!customerName || !customerPhone || !numberOfPeople || !checkInDate || !checkOutDate) {
+      alert("Please fill all details including check-in and check-out dates.");
       return;
     }
-  
+
     const stripe = await stripePromise;
-  
+
     const response = await fetch('http://localhost:5000/create-checkout-session', {
       method: 'POST',
       headers: {
@@ -66,6 +66,8 @@ const Deal = () => {
           customerName,
           customerPhone,
           numberOfPeople,
+          checkInDate,
+          checkOutDate,
           total,
           rooms: Object.entries(quantities)
             .filter(([_, qty]) => qty > 0)
@@ -81,24 +83,24 @@ const Deal = () => {
         },
       }),
     });
-  
+
     if (!response.ok) {
       alert('❌ Stripe session not created. Please try again.');
       return;
     }
-  
+
     const session = await response.json();
-  
-    // Redirect to Stripe Checkout
+
     const result = await stripe?.redirectToCheckout({
       sessionId: session.id,
     });
-  
+
     if (result?.error) {
       console.error(result.error.message);
       alert("Stripe Checkout failed. Please try again.");
     }
   };
+
   return (
     <div className="bg-white text-gray-800 px-6 py-10">
       <h1 className="text-3xl font-bold mb-6 text-center">Hotel Deals</h1>
@@ -166,10 +168,22 @@ const Deal = () => {
               placeholder="No. of People"
               value={numberOfPeople}
               onChange={(e) => setNumberOfPeople(e.target.value)}
+              className="w-full mb-2 px-3 py-2 border rounded-md text-sm"
+            />
+            <input
+              type="date"
+              value={checkInDate}
+              onChange={(e) => setCheckInDate(e.target.value)}
+              className="w-full mb-2 px-3 py-2 border rounded-md text-sm"
+            />
+            <input
+              type="date"
+              value={checkOutDate}
+              onChange={(e) => setCheckOutDate(e.target.value)}
               className="w-full mb-4 px-3 py-2 border rounded-md text-sm"
             />
 
-            {(Object.entries(quantities) as [string, number][]) // Cast for TS
+            {(Object.entries(quantities) as [string, number][])
               .filter(([, qty]) => qty > 0)
               .map(([roomName, qty], idx) => {
                 const room = roomOptions.find((r) => r.name === roomName);
